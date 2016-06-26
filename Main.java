@@ -55,14 +55,10 @@ class Person {
         this.actualHat = actualHat;
     }
 
-    private Integer countNumberOfTrueHats(PeopleLine peopleLine) {
-        return (int) peopleLine.getPeople().stream().filter(
-                person -> !this.equals(person)).filter(person -> person.getHat()).count();
-    }
-
     public void learnHat(PeopleLine peopleLine) {
         if (this.numberInLine.equals(0)) {
-            peopleLine.setIsEvenNumberOfTrueHats(isEven(this.countNumberOfTrueHats(peopleLine)));
+            peopleLine.setIsEvenNumberOfTrueHats(isEven((int) peopleLine.getPeople().stream().filter(
+                    person -> !this.equals(person)).filter(person -> person.getHat()).count()));
         } else {
             this.setKnownHat(isEven((int)peopleLine.getPeople().stream().filter(
                     person -> !this.equals(person) && person.numberInLine != 0).filter(
